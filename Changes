@@ -1,0 +1,5 @@
+2004-02-13 0.3   Fix $1 interference
+
+    Fix the fact that if there was an external match going on else where
+    then it would affect our match() method. It uses a nasty hack. 
+    Euucch.

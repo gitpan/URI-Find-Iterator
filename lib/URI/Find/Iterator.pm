@@ -8,7 +8,7 @@ use UNIVERSAL::require;
 
 use vars qw($VERSION);
 
-$VERSION = "0.2";
+$VERSION = "0.3";
 
 
 # Identifying characters accidentally picked up with a URI.
@@ -112,6 +112,9 @@ It then advances to the next one.
 sub match {
         my $self = shift;
         return undef unless defined $self->{_remain};
+
+        local $1;
+        "null" =~ m!()!; # set $1 to ""
         $self->_next();
 
         my $re = $self->{_re};
@@ -119,7 +122,7 @@ sub match {
         $self->{_remain}   =~ /(<$re>|$re)/;
 
 
-		return unless defined $1;
+        return unless defined $1 and $1 ne "";
 
         # stolen from URI::Find
         my $orig = $1;
@@ -127,7 +130,7 @@ sub match {
         my $post = $' || "";
     
 
-           # A heruristic.  Often you'll see things like:
+        # A heruristic.  Often you'll see things like:
         # "I saw this site, http://www.foo.com, and its really neat!"
         # or "Foo Industries (at http://www.foo.com)"
         # We want to avoid picking up the trailing paren, period or comma.

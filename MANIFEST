@@ -1,4 +1,6 @@
 MANIFEST
+MANIFEST.SKIP
+Changes
 Readme
 Build.PL
 Makefile.PL
