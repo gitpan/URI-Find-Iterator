@@ -8,7 +8,7 @@ use UNIVERSAL::require;
 
 use vars qw($VERSION);
 
-$VERSION = "0.6";
+$VERSION = "0.2";
 
 
 # Identifying characters accidentally picked up with a URI.
@@ -118,7 +118,8 @@ sub match {
 
         $self->{_remain}   =~ /(<$re>|$re)/;
 
-        return undef unless defined $1;
+
+		return unless defined $1;
 
         # stolen from URI::Find
         my $orig = $1;

@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name: URI-Find-Iterator
-version: 0.6
+version: 0.2
 license: perl
 distribution_type: module
 requires:
@@ -13,5 +13,5 @@ conflicts: {}
 provides:
   URI::Find::Iterator:
     file: lib/URI/Find/Iterator.pm
-    version: 0.6
+    version: 0.2
 generated_by: Module::Build version 0.21
