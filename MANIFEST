@@ -1,6 +1,7 @@
 MANIFEST
 Readme
 Build.PL
+Makefile.PL
 META.yml
 lib/URI/Find/Iterator.pm
 t/01simple.t

@@ -8,7 +8,7 @@ use UNIVERSAL::require;
 
 use vars qw($VERSION);
 
-$VERSION = "0.5";
+$VERSION = "0.6";
 
 
 # Identifying characters accidentally picked up with a URI.
@@ -118,35 +118,35 @@ sub match {
 
         $self->{_remain}   =~ /(<$re>|$re)/;
 
-		return undef unless defined $1;
+        return undef unless defined $1;
 
-		# stolen from URI::Find
-		my $orig = $1;
-		my $pre  = $` || "";
-		my $post = $' || "";
-	
+        # stolen from URI::Find
+        my $orig = $1;
+        my $pre  = $` || "";
+        my $post = $' || "";
+    
 
-   		# A heruristic.  Often you'll see things like:
+           # A heruristic.  Often you'll see things like:
         # "I saw this site, http://www.foo.com, and its really neat!"
         # or "Foo Industries (at http://www.foo.com)"
         # We want to avoid picking up the trailing paren, period or comma.
         # Of course, this might wreck a perfectly valid URI, more often than
         # not it corrects a parse mistake.
         my $clean_match = $self->_decruft($orig);
-		
-		# Translate schemeless to schemed if necessary.
-    	my $uri = $self->_schemeless_to_schemed($clean_match) unless
-		      				$clean_match =~ /^<?${scheme_re}:/;
+        
+        # Translate schemeless to schemed if necessary.
+        my $uri = $self->_schemeless_to_schemed($clean_match) unless
+                              $clean_match =~ /^<?${scheme_re}:/;
 
-    	eval {
-        	$uri = URI::URL->new($uri);
-    	};
+        eval {
+            $uri = URI::URL->new($uri);
+        };
 
         if (!$@ && defined $uri) {
-	        $self->{_result}  .= $pre;
-    	    $self->{_remain}   = $post; 
-			$self->{_match}    = $orig;
-		}
+            $self->{_result}  .= $pre;
+            $self->{_remain}   = $post; 
+            $self->{_match}    = $orig;
+        }
 
 
         return ($uri, $clean_match);
