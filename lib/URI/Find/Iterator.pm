@@ -8,7 +8,7 @@ use UNIVERSAL::require;
 
 use vars qw($VERSION);
 
-$VERSION = "0.3";
+$VERSION = "0.4";
 
 
 # Identifying characters accidentally picked up with a URI.
@@ -82,7 +82,7 @@ sub new {
         $re_class->can('schemeless_uri_re') || die "$re_class has no method schemeless_uri_re\n";
     
         $re = sprintf '(?:%s|%s)', $re_class->uri_re, $re_class->schemeless_uri_re;
-        $re = "(<$re>|$re)";
+        # $re = "(<$re>|$re)";
     }
 
 
@@ -119,16 +119,16 @@ sub match {
 
         my $re = $self->{_re};
 
-        $self->{_remain}   =~ /(<$re>|$re)/;
+        my @matches = ($self->{_remain}   =~ /(.*?)(<$re>|$re)(.*)/s);
 
 
-        return unless defined $1 and $1 ne "";
+        return unless defined $2 and $2 ne "";
 
+		
         # stolen from URI::Find
-        my $orig = $1;
-        my $pre  = $` || "";
-        my $post = $' || "";
-    
+        my $orig = $2;
+        my $pre  = $1 || "";
+		my $post = $+ || "";
 
         # A heruristic.  Often you'll see things like:
         # "I saw this site, http://www.foo.com, and its really neat!"

@@ -9,6 +9,7 @@ lib/URI/Find/Iterator.pm
 t/01simple.t
 t/01nothing.t
 t/02multiple.t
+t/02multiple_newline.t
 t/03withcruft.t
 t/04class_schemeless.t
 t/04re_schemeless.t

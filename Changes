@@ -1,3 +1,21 @@
+2004-08-19 0.4   Switch from $` and $' 
+
+	From the perlre man manpage:
+	"WARNING: Once Perl sees that you need one of $&, $`, or $' anywhere
+    in the program, it has to provide them for every pattern match. This 
+    may substantially slow your program. Perl uses the same mechanism to 
+    produce $1, $2, etc, so you also pay a price for each pattern that 
+    contains capturing parentheses. (To avoid this cost while retaining 
+    the grouping behaviour, use the extended regular expression (?: ... 
+    ) instead.) But if you never use $&, $` or $', then patterns without 
+    capturing parentheses will not be penalized. So avoid $&, $', and $` 
+    if you can, but if you can't (and some algorithms really appreciate 
+    them), once you've used them once, use them at will, because you've 
+    already paid the price. As of 5.005, $& is not so costly as the 
+    other two."
+
+	We now use another regex. Thanks to matt Lawrence for the help.
+
 2004-02-13 0.3   Fix $1 interference
 
     Fix the fact that if there was an external match going on else where

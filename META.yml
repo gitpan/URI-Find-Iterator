@@ -1,17 +1,17 @@
 --- #YAML:1.0
 name: URI-Find-Iterator
-version: 0.3
+version: 0.4
+author:
+  - |-
+    Copyright (c) 2003, Simon Wistow <simon@thegestalt.org>
+abstract: provides an iterator interface to B<URI::Find>
 license: perl
-distribution_type: module
 requires:
   Test::More: 0
   UNIVERSAL::require: 0
   URI::Find: 0
-recommends: {}
-build_requires: {}
-conflicts: {}
 provides:
   URI::Find::Iterator:
     file: lib/URI/Find/Iterator.pm
-    version: 0.3
-generated_by: Module::Build version 0.21
+    version: 0.4
+generated_by: Module::Build version 0.25
